@@ -6,8 +6,8 @@ Aplicativo móvel de combate à propagação de notícias falsas - *fake news*. 
 **Equipe de Desenvolvimento**: Paulo Afonso
 
 **Atores do sistema**:
-1. *Usuário*: interage com o aplicativo para a realização de tarefas de seu interesse.
-2. *FakeNews API*: responsável por gerir os dados exibidos no aplicativo (notícias, likes, entre outros).
+* *Usuário*: interage com o aplicativo para a realização de tarefas de seu interesse.
+* *FakeNews API*: responsável por gerir os dados exibidos no aplicativo (notícias, likes, entre outros).
 
 **Diagrama de casos de uso**:
 ![Diagrama de casos de uso do aplicativo](https://github.com/gcc132-mis/fakenewsapp/blob/master/casos-de-uso-fakenewsapp.png)
