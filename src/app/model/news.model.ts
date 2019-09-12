@@ -3,7 +3,9 @@ export class NewsModel {
     private _likes: number;
     private _publishedAt: Date;
     private _image: string;
-
+    private _content: string;
+    private _link: string;    
+    
     public constructor(news: any) {
         Object.assign(this, news);
     }
@@ -32,5 +34,17 @@ export class NewsModel {
     }
     public set image(image: string) {
         this._image = image;
+    }  
+    public get content(): string {
+        return this._content;
+    }
+    public set content(content: string) {
+        this._content = content;
+    }  
+    public get link(): string {
+        return this._link;
+    }
+    public set link(link: string) {
+        this._link = link;
     }  
 }

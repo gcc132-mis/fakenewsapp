@@ -5,6 +5,10 @@
 </ion-header>
 
 <ion-content>
+
+  <ion-searchbar showCancelButton="focus" placeholder="Encontrar notícias"
+  (ionChange)="updateListNews($event)"></ion-searchbar>
+
   <ion-card class="welcome-card" *ngFor="let news of lstNews">
     <img src="{{news.image}}" />
     <ion-card-header>
