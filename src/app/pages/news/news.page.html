@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>news</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="welcome-card" *ngFor="let news of lstNews">
+    <img src="{{news.image}}" />
+    <ion-card-header>
+      <ion-card-title>
+        {{news.title}}
+      </ion-card-title>
+      <ion-card-subtitle>Publicado em: {{news.publishedAt}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-tab-button>
+            <ion-icon name="heart"></ion-icon>
+            <ion-label>{{news.likes}} likes</ion-label>
+          </ion-tab-button>
+          <ion-tab-button>
+            <ion-icon name="star-outline"></ion-icon>
+            <ion-label>Favoritar</ion-label>
+          </ion-tab-button>
+          <ion-tab-button>
+            <ion-icon name="share-alt"></ion-icon>
+            <ion-label>Compartilhar</ion-label>
+          </ion-tab-button>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+
+  </ion-card>
+
+
+</ion-content>
