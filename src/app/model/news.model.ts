@@ -1,4 +1,5 @@
 export class NewsModel {
+    private _id: number;
     private _title: string;
     private _likes: number;
     private _publishedAt: Date;
@@ -11,6 +12,12 @@ export class NewsModel {
     }
 
     // Getters and setters
+    public get id(): number {
+        return this._id;
+    }
+    public set id(id: number) {
+        this._id = id;
+    }
     public get title(): string {
         return this._title;
     }

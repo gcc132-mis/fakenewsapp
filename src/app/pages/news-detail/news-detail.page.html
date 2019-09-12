@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>news-detail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="welcome-card">
+      <img src="{{news.image}}" />
+      <ion-card-header>
+      <ion-card-title>
+        {{news.title}}
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="ion-text-justify">{{news.content}}</div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+<ion-footer>
+  <ion-button fill="outline" expand="block" href="{{news.link}}" target="_blank">Ler mais...</ion-button>
+</ion-footer>

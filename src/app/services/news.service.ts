@@ -11,6 +11,7 @@ export class NewsService {
   constructor() {
     this._lstNews = [
       new NewsModel({
+        id: 1,
         title: "É montagem vídeo que mostra furacão Dorian sobre as Bahamas",
         likes: 10,
         publishedAt: new Date("09/15/2019 15:00:24"),
@@ -19,6 +20,7 @@ export class NewsService {
         link: "https://piaui.folha.uol.com.br/lupa/2019/09/04/verificamos-video-furacao-dorian-bahamas/"
       }),
       new NewsModel({
+        id: 2,
         title: "Polícia Federal não realizou operação contra a Rede Globo em 30 de agosto",
         likes: 50,
         publishedAt: new Date("09/04/2019 19:02:00"),
@@ -27,6 +29,7 @@ export class NewsService {
         link: "https://piaui.folha.uol.com.br/lupa/2019/09/03/verificamos-globo-pf/"
       }),
       new NewsModel({
+        id: 3,
         title: "É falso que Drauzio Varella recomendou suplemento contra dores articulares",
         likes: 75,
         publishedAt: new Date("09/02/2019 18:23:00"),
@@ -39,6 +42,13 @@ export class NewsService {
 
   public getAll(): NewsModel[] {
     return this._lstNews;
+  }
+
+  public searchById(id: number): NewsModel {
+    return this._lstNews.find((news: NewsModel) => {
+      return (news.id == id)
+    }
+    );
   }
 
   public searchByTitle(title: string): NewsModel[] {
