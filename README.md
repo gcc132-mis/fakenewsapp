@@ -4,4 +4,4 @@ Aplicativo móvel de combate à propagação de notícias falsas - *fake news*. 
 * favoritar notícias de seu interesse para facilitar o acesso posterior a elas.
 
 **Funções desta versão do aplicativo**:
-![Exemplo de uso do aplicativo]()
+![Exemplo de uso do aplicativo](https://github.com/gcc132-mis/fakenewsapp/blob/aula1/sample.gif)
