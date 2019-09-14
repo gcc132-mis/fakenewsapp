@@ -20,16 +20,9 @@ export class NewsPage implements OnInit {
   }
 
   async shareWhatsApp(id: number) {
-    let news: NewsModel = await this.newsService.searchById(id);
-
-    // Text + Image or URL works
-    this.socialSharing.shareViaWhatsApp(news.title, news.image, news.link).then(() => {
-      // Sucess
-    }).catch((e) => {
-      // Error!
-    });
+    let news: NewsModel = this.newsService.searchById(id);
+    this.socialSharing.shareViaWhatsApp(news.title, news.image, news.link);
   }
-
 
   ngOnInit() {
   }
