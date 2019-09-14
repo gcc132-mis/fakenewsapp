@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NewsModel } from '../model/news.model';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ export class NewsService {
 
   private _lstNews: NewsModel[];
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this._lstNews = [
       new NewsModel({
         id: 1,
