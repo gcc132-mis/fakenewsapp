@@ -9,13 +9,32 @@
 
 <ion-content>
   <ion-card class="welcome-card">
-    <img src="{{news.image}}" />
     <ion-card-header>
       <ion-card-title>
         {{news.title}}
       </ion-card-title>
     </ion-card-header>
+    <img src="{{news.image}}" />
     <ion-card-content>
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-tab-button>
+              <ion-icon name="heart"></ion-icon>
+              <ion-label>{{news.likes}} likes</ion-label>
+            </ion-tab-button>
+            <ion-tab-button>
+              <ion-icon name="star-outline"></ion-icon>
+              <ion-label>Favoritar</ion-label>
+            </ion-tab-button>
+            <ion-tab-button (click)="shareWhatsApp(news.id)">
+              <ion-icon name="logo-whatsapp"></ion-icon>
+              <ion-label>Compartilhar</ion-label>
+            </ion-tab-button>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+
       <div class="ion-text-justify">{{news.content}}</div>
     </ion-card-content>
   </ion-card>
