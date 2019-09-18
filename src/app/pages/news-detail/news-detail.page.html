@@ -19,25 +19,24 @@
     <ion-card-content>
       <ion-grid>
         <ion-row>
-            <ion-tab-button>
-                <ion-icon name="heart"></ion-icon>
-                <ion-label>{{news.likes}} likes</ion-label>
-              </ion-tab-button>
-              <ion-tab-button>
-                <ion-icon name="star-outline"></ion-icon>
-                <ion-label>Favoritar</ion-label>
-              </ion-tab-button>
-              <ion-tab-button (click)="shareWhatsApp(news.id)">
-                <ion-icon name="logo-whatsapp"></ion-icon>
-                <ion-label>Compartilhar</ion-label>
-              </ion-tab-button>
-              <ion-tab-button href="{{news.link}}" target="_blank">
-                  <ion-icon name="globe"></ion-icon>
-                  <ion-label>Ler mais...</ion-label>
-                </ion-tab-button>
-              </ion-row>
+          <ion-tab-button>
+            <ion-icon name="heart"></ion-icon>
+            <ion-label>{{news.likes}} likes</ion-label>
+          </ion-tab-button>
+          <ion-tab-button>
+            <ion-icon name="star-outline"></ion-icon>
+            <ion-label>Favoritar</ion-label>
+          </ion-tab-button>
+          <ion-tab-button (click)="shareWhatsApp(news.id)">
+            <ion-icon name="logo-whatsapp"></ion-icon>
+            <ion-label>Compartilhar</ion-label>
+          </ion-tab-button>
+        </ion-row>
       </ion-grid>
       <div class="ion-text-justify">{{news.content}}</div>
     </ion-card-content>
   </ion-card>
 </ion-content>
+<ion-footer>
+  <ion-button fill="outline" expand="block" href="{{news.link}}" target="_blank">Ler mais...</ion-button>
+</ion-footer>
