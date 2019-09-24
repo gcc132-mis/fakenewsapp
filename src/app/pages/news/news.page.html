@@ -9,7 +9,7 @@
   <ion-searchbar showCancelButton="focus" placeholder="Encontrar notícias"
   (ionChange)="updateListNews($event)"></ion-searchbar>
 
-  <ion-card class="welcome-card" *ngFor="let news of lstNews">
+  <ion-card *ngFor="let news of lstNews">
     <img src="{{news.image}}"  [routerLink]="['/details', news.id]"/>
     <ion-card-header>
       <ion-card-title>
