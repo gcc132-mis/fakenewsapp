@@ -6,7 +6,7 @@
 
 <ion-content>
 
-  <ion-list *ngFor="let favorite of LstFavoriteNews">
+  <ion-list *ngFor="let favorite of lstFavoriteNews">
     <ion-item>
 
       <ion-avatar slot="start">
@@ -16,10 +16,9 @@
         <p>{{favorite.news.title}}</p>
       </ion-label>
 
-      <ion-button fill="clear" color="danger" slot="end" (click)="removeFavorite(favorite.Id)">
+      <ion-button fill="clear" color="danger" slot="end" (click)="removeFavorite(favorite.id)">
         <ion-icon name="remove-circle"></ion-icon>
       </ion-button>
     </ion-item>
   </ion-list>
-
 </ion-content>

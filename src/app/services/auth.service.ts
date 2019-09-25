@@ -7,7 +7,7 @@ export class AuthService {
 
   constructor() { }
 
-  getAuthUserId(): number {
+  public getAuthUserId(): number {
     return 1;
   }  
 }

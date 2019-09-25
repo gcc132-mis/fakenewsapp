@@ -14,10 +14,10 @@ import { FavoriteModel } from 'src/app/model/favorite.model';
 })
 export class NewsDetailPage implements OnInit {
 
-  private currentNews: NewsModel;
-  private isFavorite: boolean;
-  private newsId: number;
-  private userId: number;
+  currentNews: NewsModel;
+  isFavorite: boolean;
+  newsId: number;
+  userId: number;
 
   constructor(private activatedRoute: ActivatedRoute, 
     private socialSharing: SocialSharing,
@@ -26,9 +26,7 @@ export class NewsDetailPage implements OnInit {
     private authService: AuthService) {       
   }
 
-  ngOnInit() {    
-    
-  }
+  ngOnInit() {}
 
   async ionViewDidEnter() {
     this.newsId = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
@@ -39,8 +37,8 @@ export class NewsDetailPage implements OnInit {
   }
 
   async shareWhatsApp() {
-    this.socialSharing.shareViaWhatsApp(this.currentNews.Title, 
-      this.currentNews.Image, this.currentNews.Link);
+    this.socialSharing.shareViaWhatsApp(this.currentNews.title, 
+      this.currentNews.image, this.currentNews.link);
   }
 
   async addFavorite() {
@@ -56,13 +54,5 @@ export class NewsDetailPage implements OnInit {
     } else {      
       // error message
     }
-  }
-  
-  public get CurrentNews(): NewsModel {
-    return this.currentNews;
-  }
-  
-  public get IsFavorite(): boolean {
-    return this.isFavorite;
   }
 }

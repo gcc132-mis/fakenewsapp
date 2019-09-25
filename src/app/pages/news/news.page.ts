@@ -9,7 +9,7 @@ import { NewsService } from 'src/app/services/news.service';
 })
 export class NewsPage implements OnInit {
 
-  private lstNews: NewsModel[];
+  lstNews: NewsModel[];
 
   constructor(private newsService: NewsService) {}
 
@@ -19,9 +19,5 @@ export class NewsPage implements OnInit {
 
   public async updateListNews(event: any) {
     this.lstNews = await this.newsService.searchByTitle(event.target.value);
-  }
-
-  public get LstNews(): NewsModel[] {
-    return this.lstNews;
   }
 }

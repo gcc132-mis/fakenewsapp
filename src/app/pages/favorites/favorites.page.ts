@@ -10,8 +10,8 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class FavoritesPage implements OnInit {
 
-  private lstFavoriteNews: FavoriteModel[];
-  private userId: number;
+  lstFavoriteNews: FavoriteModel[];
+  userId: number;
 
   constructor(private favoritesService: FavoritesService,
     private authService: AuthService) {
@@ -35,6 +35,5 @@ export class FavoritesPage implements OnInit {
 
   async updateLstFavoriteNews() {
     this.lstFavoriteNews = await this.favoritesService.getAllByUser(this.userId);
-    console.log(this.lstFavoriteNews);
   }
 }

@@ -9,7 +9,7 @@ import 'rxjs/Rx';
 })
 export class NewsService {
 
-  private API_URL: string = "http://localhost:3000";
+  API_URL: string = "http://localhost:3000";
 
   constructor(private http: HttpClient) { }
 
