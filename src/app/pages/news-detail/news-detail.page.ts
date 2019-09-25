@@ -12,20 +12,20 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 export class NewsDetailPage implements OnInit {
 
   private _news: NewsModel;
+  private _newsId: number;
 
   constructor(private activatedRoute: ActivatedRoute, 
     private socialSharing: SocialSharing,
     private newsService: NewsService) { 
-    let newsid: number = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
-    this._news = this.newsService.searchById(newsid);
+    this._newsId = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));    
   }
 
   async shareWhatsApp(id: number) {
-    let news: NewsModel = this.newsService.searchById(id);
-    this.socialSharing.shareViaWhatsApp(news.title, news.image, news.link);
+    this.socialSharing.shareViaWhatsApp(this._news.title, this._news.image, this._news.link);
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this._news = await this.newsService.searchById(this._newsId);
   }
 
   public get news(): NewsModel {

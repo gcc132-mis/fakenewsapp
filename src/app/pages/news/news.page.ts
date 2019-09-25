@@ -12,14 +12,15 @@ export class NewsPage implements OnInit {
   private _lstNews: NewsModel[];
 
   constructor(private newsService: NewsService) {
-    this._lstNews = this.newsService.getAll();
+    this._lstNews = [];
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this._lstNews = await this.newsService.getAll();
   }
 
-  public updateListNews(event: any) {
-    this._lstNews = this.newsService.searchByTitle(event.target.value);
+  public async updateListNews(event: any) {
+    this._lstNews = await this.newsService.searchByTitle(event.target.value);
   }
 
   public get lstNews(): NewsModel[] {
