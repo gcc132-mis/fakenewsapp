@@ -46,4 +46,10 @@ export class NewsService {
       }
     ).toPromise();
   }
+
+  public update(news: NewsModel) {
+    return this.http.put(`${this.API_URL}/news/${news.id}`, news).map(
+      (news: NewsModel) => new NewsModel(news)   
+    ).toPromise();
+  }
 }

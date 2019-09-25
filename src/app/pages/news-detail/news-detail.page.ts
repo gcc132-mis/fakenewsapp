@@ -16,7 +16,8 @@ import { FavoriteType } from 'src/app/model/favorite-type.model';
 export class NewsDetailPage implements OnInit {
 
   currentNews: NewsModel;
-  isFavorite: boolean;
+  starId: number;
+  likeId: number;
   newsId: number;
   userId: number;
 
@@ -34,7 +35,8 @@ export class NewsDetailPage implements OnInit {
     this.userId = this.authService.getAuthUserId();
 
     this.currentNews = await this.newsService.searchById(this.newsId);
-    this.isFavorite = await this.favoritesService.isFavorite(this.userId, this.newsId, FavoriteType.STAR);
+    this.starId = await this.favoritesService.getIdByUserAndNews(this.userId, this.newsId, FavoriteType.STAR);
+    this.likeId = await this.favoritesService.getIdByUserAndNews(this.userId, this.newsId, FavoriteType.LIKE);
   }
 
   async shareWhatsApp() {
@@ -42,8 +44,8 @@ export class NewsDetailPage implements OnInit {
       this.currentNews.image, this.currentNews.link);
   }
 
-  async addFavorite() {
-    if (!this.isFavorite) {
+  async addStar() {
+    if (!this.starId) {
       let favorite = new FavoriteModel(
         {
           "userId": this.userId,
@@ -51,10 +53,31 @@ export class NewsDetailPage implements OnInit {
           "favoriteType": FavoriteType.STAR
         }
       );
-      this.favoritesService.add(favorite);
-      this.isFavorite = true;
+      this.starId = await this.favoritesService.add(favorite);      
     } else {      
       // error message
     }
+  }
+
+  async handleLike() {
+    if (!this.likeId) {
+      let favorite = new FavoriteModel(
+        {
+          "userId": this.userId,
+          "newsId": this.newsId,
+          "favoriteType": FavoriteType.LIKE
+        }
+      );
+      this.likeId = await this.favoritesService.add(favorite);
+      this.currentNews.likes += 1;      
+      
+    } else {      
+      await this.favoritesService.delete(this.likeId);
+      this.likeId = null;
+
+      this.currentNews.likes -= 1;      
+    }
+
+    this.currentNews = await this.newsService.update(this.currentNews);
   }
 }

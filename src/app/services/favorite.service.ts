@@ -15,16 +15,16 @@ export class FavoritesService {
 
   constructor(private http: HttpClient) { }
 
-  public isFavorite(userId: number, newsId: number, type: FavoriteType): Promise<boolean> {
-    return this.http.get(`${this.API_URL}/favorites?userId=${userId}&newsId=${newsId}&type=${type}`).map(
+  public getIdByUserAndNews(userId: number, newsId: number, type: FavoriteType): Promise<number> {
+    return this.http.get(`${this.API_URL}/favorites?userId=${userId}&newsId=${newsId}&favoriteType=${type}`).map(
       (favorites: FavoriteModel[]) => {        
-        return (favorites.length == 0) ? false : true;
+        return (favorites.length == 0) ? null : favorites[0].id;
       }
     ).toPromise();
   }
 
   public getAllByUser(userId: number, type: FavoriteType): Promise<FavoriteModel[]> {
-    return this.http.get(`${this.API_URL}/favorites?_expand=news&userId=${userId}&type=${type}`).map(
+    return this.http.get(`${this.API_URL}/favorites?_expand=news&userId=${userId}&favoriteType=${type}`).map(
       (favorites: FavoriteModel[]) => {        
         return favorites.map(
           (favorite: FavoriteModel) => new FavoriteModel(favorite)
@@ -32,8 +32,10 @@ export class FavoritesService {
     ).toPromise();
   }
 
-  public add(favorite: FavoriteModel): Promise<any> {
-    return this.http.post(`${this.API_URL}/favorites`, favorite).toPromise();
+  public add(favorite: FavoriteModel): Promise<number> {
+    return this.http.post(`${this.API_URL}/favorites`, favorite).map(
+      (favorite: FavoriteModel) => favorite.id   
+    ).toPromise();
   }
 
   public delete(id: number): Promise<any> {    

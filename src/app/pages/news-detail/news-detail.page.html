@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-card  *ngIf="currentNews">
+  <ion-card *ngIf="currentNews">
     <ion-card-header>
       <ion-card-title>
         {{currentNews.title}}
@@ -19,15 +19,14 @@
     <ion-card-content>
       <ion-grid>
         <ion-row>
-          <ion-tab-button >
-            <ion-icon name="heart"></ion-icon>
+          <ion-tab-button>
+            <ion-icon name="heart" *ngIf="likeId" (click)="handleLike()"  color="primary"></ion-icon>
+            <ion-icon name="heart" *ngIf="!likeId" (click)="handleLike()"></ion-icon>
             <ion-label>{{currentNews.likes}} likes</ion-label>
           </ion-tab-button>
           <ion-tab-button>
-            <ion-icon name="star" color="primary" (click)="addFavorite()" 
-              *ngIf="isFavorite"></ion-icon>
-              <ion-icon name="star" (click)="addFavorite()" 
-              *ngIf="!isFavorite"></ion-icon>
+            <ion-icon name="star" *ngIf="starId" color="primary" (click)="addStar()"></ion-icon>
+            <ion-icon name="star" *ngIf="!starId" (click)="addStar()"></ion-icon>
             <ion-label>Favoritar</ion-label>
           </ion-tab-button>
           <ion-tab-button (click)="shareWhatsApp()">
@@ -41,6 +40,6 @@
     </ion-card-content>
   </ion-card>
 </ion-content>
-<ion-footer  *ngIf="currentNews">
+<ion-footer *ngIf="currentNews">
   <ion-button fill="outline" expand="block" href="{{currentNews.link}}" target="_blank">Ler mais...</ion-button>
 </ion-footer>

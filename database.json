@@ -36,15 +36,27 @@
   "favorites": [
     {
       "userId": 1,
-      "newsId": 1,
-      "id": 3,
-      "favoriteType": 0
+      "newsId": 3,
+      "favoriteType": 0,
+      "id": 1
     },
     {
       "userId": 1,
-      "newsId": 3,
-      "id": 5,
-      "favoriteType": 0
+      "newsId": 2,
+      "favoriteType": 1,
+      "id": 2
+    },
+    {
+      "userId": 1,
+      "newsId": 1,
+      "favoriteType": 1,
+      "id": 3
+    },
+    {
+      "userId": 1,
+      "newsId": 1,
+      "favoriteType": 0,
+      "id": 4
     }
   ]
 }
