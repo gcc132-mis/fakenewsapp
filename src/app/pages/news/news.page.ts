@@ -8,10 +8,12 @@ import { NewsModel } from 'src/app/model/news.model';
 })
 export class NewsPage implements OnInit {
 
-  private _lstNews: NewsModel[];
+  private lstNews: NewsModel[];
 
-  constructor() {
-    this._lstNews = [
+  constructor() {}
+
+  ngOnInit() {
+    this.lstNews = [
       new NewsModel({
         title: "É montagem vídeo que mostra furacão Dorian sobre as Bahamas",
         likes: 10,
@@ -33,11 +35,8 @@ export class NewsPage implements OnInit {
     ];
   }
 
-  ngOnInit() {
-  }
-
-  public get lstNews(): NewsModel[] {
-    return this._lstNews;
+  public get LstNews(): NewsModel[] {
+    return this.lstNews;
   }
 
 }
