@@ -26,7 +26,11 @@ export class NewsDetailPage implements OnInit {
     private authService: AuthService) {       
   }
 
-  async ngOnInit() {    
+  ngOnInit() {    
+    
+  }
+
+  async ionViewDidEnter() {
     this.newsId = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
     this.userId = this.authService.getAuthUserId();
 
@@ -35,8 +39,8 @@ export class NewsDetailPage implements OnInit {
   }
 
   async shareWhatsApp() {
-    this.socialSharing.shareViaWhatsApp(this.currentNews.title, 
-      this.currentNews.image, this.currentNews.link);
+    this.socialSharing.shareViaWhatsApp(this.currentNews.Title, 
+      this.currentNews.Image, this.currentNews.Link);
   }
 
   async addFavorite() {

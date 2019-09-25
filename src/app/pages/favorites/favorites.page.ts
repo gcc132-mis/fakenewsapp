@@ -17,9 +17,7 @@ export class FavoritesPage implements OnInit {
     private authService: AuthService) {
   }
 
-  ngOnInit() {
-    this.lstFavoriteNews = [];
-  }
+  ngOnInit() {}
 
   async ionViewDidEnter() {
     this.userId = this.authService.getAuthUserId(); // fake id
@@ -37,5 +35,6 @@ export class FavoritesPage implements OnInit {
 
   async updateLstFavoriteNews() {
     this.lstFavoriteNews = await this.favoritesService.getAllByUser(this.userId);
+    console.log(this.lstFavoriteNews);
   }
 }
