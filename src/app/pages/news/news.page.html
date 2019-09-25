@@ -9,13 +9,13 @@
   <ion-searchbar showCancelButton="focus" placeholder="Encontrar notícias"
   (ionChange)="updateListNews($event)"></ion-searchbar>
 
-  <ion-card *ngFor="let news of LstNews">
-    <img src="{{news.Image}}"  [routerLink]="['/details', news.Id]"/>
+  <ion-card *ngFor="let news of lstNews">
+    <img src="{{news.image}}"  [routerLink]="['/details', news.id]"/>
     <ion-card-header>
       <ion-card-title>
-        {{news.Title}}
+        {{news.title}}
       </ion-card-title>
-      <ion-card-subtitle>{{news.Likes}} likes | Publicado em: {{news.PublishedAt}}</ion-card-subtitle>
+      <ion-card-subtitle>{{news.likes}} likes | Publicado em: {{news.publishedAt}}</ion-card-subtitle>
     </ion-card-header>
   </ion-card>
 </ion-content>

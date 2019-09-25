@@ -6,7 +6,7 @@ import { NewsModel } from '../model/news.model';
 })
 export class NewsService {
 
-  private lstNews: NewsModel[];
+  lstNews: NewsModel[];
 
   constructor() {
     this.lstNews = [
@@ -46,7 +46,7 @@ export class NewsService {
 
   public searchById(id: number): NewsModel {
     return this.lstNews.find((news: NewsModel) => {
-      return (news.Id == id)
+      return (news.id == id)
     }
     );
   }
@@ -59,7 +59,7 @@ export class NewsService {
     }
 
     return this.lstNews.filter((news: NewsModel) => {
-      return (news.Title.toLowerCase().includes(title))
+      return (news.title.toLowerCase().includes(title))
     }
     );
   }

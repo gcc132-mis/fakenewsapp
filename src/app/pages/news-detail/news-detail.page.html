@@ -8,20 +8,20 @@
 </ion-header>
 
 <ion-content>
-  <ion-card *ngIf="CurrentNews">
+  <ion-card *ngIf="currentNews">
     <ion-card-header>
       <ion-card-title>
-        {{CurrentNews.Title}}
+        {{currentNews.title}}
       </ion-card-title>
-      <ion-card-subtitle>Publicado em: {{CurrentNews.PublishedAt}}</ion-card-subtitle>
+      <ion-card-subtitle>Publicado em: {{currentNews.publishedAt}}</ion-card-subtitle>
     </ion-card-header>
-    <img src="{{CurrentNews.Image}}" />
+    <img src="{{currentNews.image}}" />
     <ion-card-content>
       <ion-grid>
         <ion-row>
           <ion-tab-button>
             <ion-icon name="heart"></ion-icon>
-            <ion-label>{{CurrentNews.Likes}} likes</ion-label>
+            <ion-label>{{currentNews.likes}} likes</ion-label>
           </ion-tab-button>
           <ion-tab-button>
             <ion-icon name="star-outline"></ion-icon>
@@ -33,10 +33,10 @@
           </ion-tab-button>
         </ion-row>
       </ion-grid>
-      <div class="ion-text-justify">{{CurrentNews.Content}}</div>
+      <div class="ion-text-justify">{{currentNews.content}}</div>
     </ion-card-content>
   </ion-card>
 </ion-content>
-<ion-footer *ngIf="CurrentNews">
-  <ion-button fill="outline" expand="block" href="{{CurrentNews.link}}" target="_blank">Ler mais...</ion-button>
+<ion-footer *ngIf="currentNews">
+  <ion-button fill="outline" expand="block" href="{{currentNews.link}}" target="_blank">Ler mais...</ion-button>
 </ion-footer>
