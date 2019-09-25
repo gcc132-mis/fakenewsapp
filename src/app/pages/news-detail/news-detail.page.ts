@@ -6,6 +6,7 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { FavoritesService } from 'src/app/services/favorite.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { FavoriteModel } from 'src/app/model/favorite.model';
+import { FavoriteType } from 'src/app/model/favorite-type.model';
 
 @Component({
   selector: 'app-news-detail',
@@ -33,7 +34,7 @@ export class NewsDetailPage implements OnInit {
     this.userId = this.authService.getAuthUserId();
 
     this.currentNews = await this.newsService.searchById(this.newsId);
-    this.isFavorite = await this.favoritesService.isFavorite(this.userId, this.newsId);
+    this.isFavorite = await this.favoritesService.isFavorite(this.userId, this.newsId, FavoriteType.STAR);
   }
 
   async shareWhatsApp() {
@@ -46,7 +47,8 @@ export class NewsDetailPage implements OnInit {
       let favorite = new FavoriteModel(
         {
           "userId": this.userId,
-          "newsId": this.newsId 
+          "newsId": this.newsId,
+          "favoriteType": FavoriteType.STAR
         }
       );
       this.favoritesService.add(favorite);

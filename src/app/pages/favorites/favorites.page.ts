@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FavoritesService } from 'src/app/services/favorite.service';
 import { FavoriteModel } from 'src/app/model/favorite.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { FavoriteType } from 'src/app/model/favorite-type.model';
 
 @Component({
   selector: 'app-favorites',
@@ -34,6 +35,6 @@ export class FavoritesPage implements OnInit {
   }
 
   async updateLstFavoriteNews() {
-    this.lstFavoriteNews = await this.favoritesService.getAllByUser(this.userId);
+    this.lstFavoriteNews = await this.favoritesService.getAllByUser(this.userId, FavoriteType.STAR);
   }
 }

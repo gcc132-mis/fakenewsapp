@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import 'rxjs/Rx';
 
 import { FavoriteModel } from '../model/favorite.model';
+import { FavoriteType } from '../model/favorite-type.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,16 +15,16 @@ export class FavoritesService {
 
   constructor(private http: HttpClient) { }
 
-  public isFavorite(userId: number, newsId: number): Promise<boolean> {
-    return this.http.get(`${this.API_URL}/favorites?userId=${userId}&newsId=${newsId}`).map(
+  public isFavorite(userId: number, newsId: number, type: FavoriteType): Promise<boolean> {
+    return this.http.get(`${this.API_URL}/favorites?userId=${userId}&newsId=${newsId}&type=${type}`).map(
       (favorites: FavoriteModel[]) => {        
         return (favorites.length == 0) ? false : true;
       }
     ).toPromise();
   }
 
-  public getAllByUser(userId: number): Promise<FavoriteModel[]> {
-    return this.http.get(`${this.API_URL}/favorites?_expand=news&userId=${userId}`).map(
+  public getAllByUser(userId: number, type: FavoriteType): Promise<FavoriteModel[]> {
+    return this.http.get(`${this.API_URL}/favorites?_expand=news&userId=${userId}&type=${type}`).map(
       (favorites: FavoriteModel[]) => {        
         return favorites.map(
           (favorite: FavoriteModel) => new FavoriteModel(favorite)
