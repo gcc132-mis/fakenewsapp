@@ -8,7 +8,7 @@ import { NewsModel } from 'src/app/model/news.model';
 })
 export class NewsPage implements OnInit {
 
-  private lstNews: NewsModel[];
+  lstNews: NewsModel[];
 
   constructor() {}
 
@@ -34,9 +34,4 @@ export class NewsPage implements OnInit {
       })
     ];
   }
-
-  public get LstNews(): NewsModel[] {
-    return this.lstNews;
-  }
-
 }
