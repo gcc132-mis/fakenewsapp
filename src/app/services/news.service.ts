@@ -6,10 +6,10 @@ import { NewsModel } from '../model/news.model';
 })
 export class NewsService {
 
-  private _lstNews: NewsModel[];
+  private lstNews: NewsModel[];
 
   constructor() {
-    this._lstNews = [
+    this.lstNews = [
       new NewsModel({
         id: 1,
         title: "É montagem vídeo que mostra furacão Dorian sobre as Bahamas",
@@ -41,12 +41,12 @@ export class NewsService {
   }
 
   public getAll(): NewsModel[] {
-    return this._lstNews;
+    return this.lstNews;
   }
 
   public searchById(id: number): NewsModel {
-    return this._lstNews.find((news: NewsModel) => {
-      return (news.id == id)
+    return this.lstNews.find((news: NewsModel) => {
+      return (news.Id == id)
     }
     );
   }
@@ -55,11 +55,11 @@ export class NewsService {
     title = title.trim().toLowerCase();
 
     if (title == '') {
-      return this._lstNews;
+      return this.lstNews;
     }
 
-    return this._lstNews.filter((news: NewsModel) => {
-      return (news.title.toLowerCase().includes(title))
+    return this.lstNews.filter((news: NewsModel) => {
+      return (news.Title.toLowerCase().includes(title))
     }
     );
   }
