@@ -8,36 +8,39 @@
 </ion-header>
 
 <ion-content>
-  <ion-card *ngIf="news">
+  <ion-card  *ngIf="CurrentNews">
     <ion-card-header>
       <ion-card-title>
-        {{news.title}}
+        {{CurrentNews.title}}
       </ion-card-title>
-      <ion-card-subtitle>Publicado em: {{news.publishedAt}}</ion-card-subtitle>
+      <ion-card-subtitle>Publicado em: {{CurrentNews.publishedAt}}</ion-card-subtitle>
     </ion-card-header>
-    <img src="{{news.image}}" />
+    <img src="{{CurrentNews.image}}" />
     <ion-card-content>
       <ion-grid>
         <ion-row>
-          <ion-tab-button>
+          <ion-tab-button >
             <ion-icon name="heart"></ion-icon>
-            <ion-label>{{news.likes}} likes</ion-label>
+            <ion-label>{{CurrentNews.likes}} likes</ion-label>
           </ion-tab-button>
           <ion-tab-button>
-            <ion-icon name="star-outline"></ion-icon>
+            <ion-icon name="star" color="primary"  (click)="addFavorite()" 
+              *ngIf="IsFavorite"></ion-icon>
+              <ion-icon name="star" (click)="addFavorite()" 
+              *ngIf="!IsFavorite"></ion-icon>
             <ion-label>Favoritar</ion-label>
           </ion-tab-button>
-          <ion-tab-button (click)="shareWhatsApp(news.id)">
+          <ion-tab-button (click)="shareWhatsApp()">
             <ion-icon name="logo-whatsapp"></ion-icon>
             <ion-label>Compartilhar</ion-label>
           </ion-tab-button>
         </ion-row>
       </ion-grid>
 
-      <div class="ion-text-justify">{{news.content}}</div>
+      <div class="ion-text-justify">{{CurrentNews.content}}</div>
     </ion-card-content>
   </ion-card>
 </ion-content>
-<ion-footer>
-  <ion-button fill="outline" expand="block" href="teste" target="_blank">Ler mais...</ion-button>
+<ion-footer  *ngIf="CurrentNews">
+  <ion-button fill="outline" expand="block" href="{{CurrentNews.link}}" target="_blank">Ler mais...</ion-button>
 </ion-footer>

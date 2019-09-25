@@ -3,6 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { NewsModel } from 'src/app/model/news.model';
 import { NewsService } from 'src/app/services/news.service';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { FavoritesService } from 'src/app/services/favorite.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { FavoriteModel } from 'src/app/model/favorite.model';
 
 @Component({
   selector: 'app-news-detail',
@@ -11,24 +14,51 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 })
 export class NewsDetailPage implements OnInit {
 
-  private _news: NewsModel;
-  private _newsId: number;
+  private currentNews: NewsModel;
+  private isFavorite: boolean;
+  private newsId: number;
+  private userId: number;
 
   constructor(private activatedRoute: ActivatedRoute, 
     private socialSharing: SocialSharing,
-    private newsService: NewsService) { 
-    this._newsId = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));    
+    private newsService: NewsService,
+    private favoritesService: FavoritesService,
+    private authService: AuthService) {       
   }
 
-  async shareWhatsApp(id: number) {
-    this.socialSharing.shareViaWhatsApp(this._news.title, this._news.image, this._news.link);
+  async ngOnInit() {    
+    this.newsId = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
+    this.userId = this.authService.getAuthUserId();
+
+    this.currentNews = await this.newsService.searchById(this.newsId);
+    this.isFavorite = await this.favoritesService.isFavorite(this.userId, this.newsId);
   }
 
-  async ngOnInit() {
-    this._news = await this.newsService.searchById(this._newsId);
+  async shareWhatsApp() {
+    this.socialSharing.shareViaWhatsApp(this.currentNews.title, 
+      this.currentNews.image, this.currentNews.link);
   }
 
-  public get news(): NewsModel {
-    return this._news;
+  async addFavorite() {
+    if (!this.isFavorite) {
+      let favorite = new FavoriteModel(
+        {
+          "userId": this.userId,
+          "newsId": this.newsId 
+        }
+      );
+      this.favoritesService.add(favorite);
+      this.isFavorite = true;
+    } else {      
+      // error message
+    }
+  }
+  
+  public get CurrentNews(): NewsModel {
+    return this.currentNews;
+  }
+  
+  public get IsFavorite(): boolean {
+    return this.isFavorite;
   }
 }
