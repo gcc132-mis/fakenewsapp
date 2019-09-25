@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>favorites</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list *ngFor="let Favorite of LstFavoriteNews">
+    <ion-item>
+
+      <ion-avatar slot="start">
+        <img src="{{Favorite.News.image}}">
+      </ion-avatar>
+      <ion-label class="ion-text-wrap" [routerLink]="['/details', Favorite.News.id]">
+        <p>{{Favorite.News.title}}</p>
+      </ion-label>
+
+      <ion-button fill="clear" color="danger" slot="end" (click)="removeFavorite(Favorite.Id)">
+        <ion-icon name="remove-circle"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

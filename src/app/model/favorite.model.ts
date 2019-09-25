@@ -1,10 +1,12 @@
+import { NewsModel } from './news.model';
+
 export class FavoriteModel {
     private id: number;
     private userId: number;
-    private newsId: number;  
+    private news: NewsModel;  
     
-    public constructor(like: any) {
-        Object.assign(this, like);
+    public constructor(favorite: any) {
+        Object.assign(this, favorite);
     }
 
     // Getters and setters
@@ -20,10 +22,10 @@ export class FavoriteModel {
     public set UserId(userId: number) {
         this.userId = userId;
     }
-    public get NewsId(): number {
-        return this.newsId;
+    public get News(): NewsModel {
+        return this.news;
     }
-    public set NewsId(newsId: number) {
-        this.newsId = newsId;
+    public set News(news: NewsModel) {
+        this.news = news;
     }
 }
