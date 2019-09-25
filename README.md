@@ -5,4 +5,4 @@ Aplicativo móvel de combate à propagação de notícias falsas - *fake news*. 
 
 **Funções desta versão do aplicativo**:
 
-![Exemplo de uso do aplicativo](https://github.com/gcc132-mis/fakenewsapp/blob/aula1/sample.gif)
+![Exemplo de uso do aplicativo](https://github.com/gcc132-mis/fakenewsapp/blob/aula1/sample_v1.gif)
