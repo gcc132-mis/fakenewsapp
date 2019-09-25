@@ -14,4 +14,4 @@ Aplicativo móvel de combate à propagação de notícias falsas - *fake news*. 
 
 **Links úteis**:
 * [Documento de requisitos](https://github.com/gcc132-mis/fakenewsapp/issues)
-* [Protótipo de interface gráfica](https://drive.google.com/open?id=1Y4fpzavnHOa0JBcVcv5rLwtSLsw_GZ9ZvveAACbGvKw).
+* [Protótipo de interface gráfica](https://drive.google.com/open?id=1ghMFP8QrXtzOgCdFpcrkcMbaxhMjoE-jyRng_In7F7c)
