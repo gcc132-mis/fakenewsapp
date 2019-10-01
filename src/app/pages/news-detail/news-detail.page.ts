@@ -13,18 +13,19 @@ export class NewsDetailPage implements OnInit {
 
   currentNews: NewsModel;
 
-  constructor(private activatedRoute: ActivatedRoute, 
-    private newsService: NewsService, private socialSharing: SocialSharing) { }
-
-  async shareWhatsApp() {
-    this.socialSharing.shareViaWhatsApp(this.currentNews.title, 
-      this.currentNews.image, this.currentNews.link);
+  constructor(private activatedRoute: ActivatedRoute,
+    private newsService: NewsService, private socialSharing: SocialSharing) {
+    const newsId: number = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
+    this.currentNews = this.newsService.searchById(newsId);
   }
 
-  ngOnInit() {}
+  async shareWhatsApp() {
+    const canShare: boolean = await this.socialSharing.canShareVia('whatsapp');
+    if (canShare) {
+      this.socialSharing.shareViaWhatsApp(this.currentNews.title,
+        this.currentNews.image, this.currentNews.link);
+    }
+  }
 
-  ionViewDidEnter() {
-    let newsId: number = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
-    this.currentNews = this.newsService.searchById(newsId);
-  }  
+  ngOnInit() { }
 }
