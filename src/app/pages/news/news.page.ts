@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NewsModel } from 'src/app/model/news.model';
 import { NewsService } from 'src/app/services/news.service';
-import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 @Component({
   selector: 'app-news',
@@ -10,28 +9,15 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 })
 export class NewsPage implements OnInit {
 
-  private _lstNews: NewsModel[];
-  text = 'Check out the Ionic Academy!';
-  url = 'https://ionicacademy.com';
+  lstNews: NewsModel[];
 
-  constructor(private newsService: NewsService,
-    private socialSharing: SocialSharing) {
-    this._lstNews = this.newsService.getAll();
+  constructor(private newsService: NewsService) { }
+
+  async ngOnInit() { 
+    this.lstNews = await this.newsService.getAll();
   }
 
-  async shareWhatsApp(id: number) {
-    let news: NewsModel = this.newsService.searchById(id);
-    this.socialSharing.shareViaWhatsApp(news.title, news.image, news.link);
-  }
-
-  ngOnInit() {
-  }
-
-  public updateListNews(event: any) {
-    this._lstNews = this.newsService.searchByTitle(event.target.value);
-  }
-
-  public get lstNews(): NewsModel[] {
-    return this._lstNews;
+  public async updateListNews(event: any) {
+    this.lstNews = await this.newsService.searchByTitle(event.target.value);
   }
 }
