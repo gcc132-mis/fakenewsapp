@@ -10,7 +10,7 @@ Aplicativo móvel de combate à propagação de notícias falsas - *fake news*. 
 * *FakeNews API*: responsável por gerir os dados exibidos no aplicativo (notícias, likes, entre outros).
 
 **Diagrama de casos de uso**:
-![Diagrama de casos de uso do aplicativo](https://github.com/gcc132-mis/fakenewsapp/blob/master/casos-de-uso-fakenewsappv2.png)
+![Diagrama de casos de uso do aplicativo](https://github.com/gcc132-mis/fakenewsapp/blob/master/casos-de-uso-fakenewsappv3.png)
 
 **Links úteis**:
 * [Documento de requisitos](https://github.com/gcc132-mis/fakenewsapp/issues)
