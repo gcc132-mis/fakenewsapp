@@ -21,16 +21,14 @@ export class NewsDetailPage implements OnInit {
   newsId: number;
   userId: number;
 
-  constructor(private activatedRoute: ActivatedRoute, 
+  constructor(private activatedRoute: ActivatedRoute,
     private socialSharing: SocialSharing,
     private newsService: NewsService,
     private favoritesService: FavoritesService,
-    private authService: AuthService) {       
+    private authService: AuthService) {
   }
 
-  ngOnInit() {}
-
-  async ionViewDidEnter() {
+  async ngOnInit() {
     this.newsId = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
     this.userId = this.authService.getAuthUserId();
 
@@ -40,8 +38,11 @@ export class NewsDetailPage implements OnInit {
   }
 
   async shareWhatsApp() {
-    this.socialSharing.shareViaWhatsApp(this.currentNews.title, 
-      this.currentNews.image, this.currentNews.link);
+    const canShare: boolean = await this.socialSharing.canShareVia('whatsapp');
+    if (canShare) {
+      this.socialSharing.shareViaWhatsApp(this.currentNews.title,
+        this.currentNews.image, this.currentNews.link);
+    }
   }
 
   async addStar() {
@@ -53,8 +54,8 @@ export class NewsDetailPage implements OnInit {
           "favoriteType": FavoriteType.STAR
         }
       );
-      this.starId = await this.favoritesService.add(favorite);      
-    } else {      
+      this.starId = await this.favoritesService.add(favorite);
+    } else {
       // error message
     }
   }
@@ -69,13 +70,13 @@ export class NewsDetailPage implements OnInit {
         }
       );
       this.likeId = await this.favoritesService.add(favorite);
-      this.currentNews.likes += 1;      
-      
-    } else {      
+      this.currentNews.likes += 1;
+
+    } else {
       await this.favoritesService.delete(this.likeId);
       this.likeId = null;
 
-      this.currentNews.likes -= 1;      
+      this.currentNews.likes -= 1;
     }
 
     this.currentNews = await this.newsService.update(this.currentNews);

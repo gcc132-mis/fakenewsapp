@@ -25,10 +25,6 @@ export class FavoritesPage implements OnInit {
     this.updateLstFavoriteNews();
   }
 
-  public get LstFavoriteNews() {
-    return this.lstFavoriteNews;
-  }
-
   async removeFavorite(favoriteId: number) {
     await this.favoritesService.delete(favoriteId);
     this.updateLstFavoriteNews();
