@@ -42,15 +42,9 @@
     },
     {
       "userId": 1,
-      "newsId": 3,
-      "favoriteType": 0,
-      "id": 5
-    },
-    {
-      "userId": 1,
       "newsId": 1,
       "favoriteType": 0,
-      "id": 6
+      "id": 5
     }
   ]
 }

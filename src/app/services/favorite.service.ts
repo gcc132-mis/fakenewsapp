@@ -15,7 +15,7 @@ export class FavoritesService {
 
   constructor(private http: HttpClient) { }
 
-  public getIdByUserAndNews(userId: number, newsId: number, type: FavoriteType): Promise<number> {
+  public getFavoriteId(userId: number, newsId: number, type: FavoriteType): Promise<number> {
     return this.http.get(`${this.API_URL}/favorites?userId=${userId}&newsId=${newsId}&favoriteType=${type}`).map(
       (favorites: FavoriteModel[]) => {        
         return (favorites.length == 0) ? null : favorites[0].id;

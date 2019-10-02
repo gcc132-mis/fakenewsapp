@@ -5,18 +5,13 @@
 </ion-header>
 
 <ion-content>
-
-  <ion-list *ngFor="let favorite of lstFavoriteNews">
-    <ion-item>
-      <ion-avatar slot="start">
-        <img src="{{favorite.news.image}}">
-      </ion-avatar>
-      <ion-label class="ion-text-wrap" [routerLink]="['/details', favorite.news.id]">
-        <p>{{favorite.news.title}}</p>
-      </ion-label>
-      <ion-button fill="clear" color="danger" slot="end" (click)="removeFavorite(favorite.id)">
-        <ion-icon name="trash"></ion-icon>
-      </ion-button>
-    </ion-item>
-  </ion-list>
+  <ion-card *ngFor="let favorite of lstFavoriteNews"  [routerLink]="['/details', favorite.news.id]">
+    <img src="{{favorite.news.image}}"/>
+    <ion-card-header>
+      <ion-card-title>
+        {{favorite.news.title}}
+      </ion-card-title>
+      <ion-card-subtitle>{{favorite.news.likes}} likes | Publicado em: {{favorite.news.publishedAt}}</ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
 </ion-content>
