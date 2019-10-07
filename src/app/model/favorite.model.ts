@@ -5,7 +5,7 @@ export class FavoriteModel {
 
     id: number;
     userId: number;
-    news: NewsModel;  
+    newsId: number;  
     favoriteType: FavoriteType;
     
     public constructor(favorite: any) {
