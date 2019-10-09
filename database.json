@@ -3,11 +3,11 @@
     {
       "id": 1,
       "title": "É montagem vídeo que mostra furacão Dorian sobre as Bahamas",
-      "publishedAt": "09/04/2019 14:21:00",
       "likes": 19999,
+      "publishedAt": "09/04/2019 14:21:00",
       "image": "https://piaui.folha.uol.com.br/lupa/wp-content/uploads/2019/09/furacao-dorian-bahamas-destaque.jpg",
-      "link": "https://piaui.folha.uol.com.br/lupa/2019/09/04/verificamos-video-furacao-dorian-bahamas/",
-      "content": "A informação, analisada pela Lupa, é falsa. O vídeo é na verdade uma animação por computador, criada pelo artista digital norte-americano Brent Shavnore. Ele compartilhou a obra em sua conta no Instagram no dia 19 de maio deste ano. Mais de 164 mil pessoas visualizaram o vídeo. Shavnore criou o “furacão” sobre uma foto da cidade de Miami, nos Estados Unidos. Em sua página pessoal, imagens que mostram tempestades e raios sobre cidades ou paisagens são comuns."
+      "content": "A informação, analisada pela Lupa, é falsa. O vídeo é na verdade uma animação por computador, criada pelo artista digital norte-americano Brent Shavnore. Ele compartilhou a obra em sua conta no Instagram no dia 19 de maio deste ano. Mais de 164 mil pessoas visualizaram o vídeo. Shavnore criou o “furacão” sobre uma foto da cidade de Miami, nos Estados Unidos. Em sua página pessoal, imagens que mostram tempestades e raios sobre cidades ou paisagens são comuns.",
+      "link": "https://piaui.folha.uol.com.br/lupa/2019/09/04/verificamos-video-furacao-dorian-bahamas/"
     },
     {
       "id": 2,
@@ -21,16 +21,18 @@
     {
       "id": 3,
       "title": "É falso que Drauzio Varella recomendou suplemento contra dores articulares",
+      "likes": 11,
       "publishedAt": "09/02/2019 18:23:00",
-      "likes": 10,
       "image": "https://piaui.folha.uol.com.br/lupa/wp-content/uploads/2019/09/drauzioreproducao.png",
-      "link": "https://piaui.folha.uol.com.br/lupa/2019/09/02/verificamos-drauzio-dores-articulares/",
-      "content": "O conteúdo analisado pela Lupa é falso. O doutor Drauzio Varella nunca deu entrevista ao programa Fantástico recomendando um suplemento alimentar para dores nas articulações. “Nunca fiz nem nunca farei propaganda de remédios, muito menos desses que prometem curas sem comprovação científica. Sempre que você vir meu nome associado a algum medicamento tenha certeza: é mentira, propaganda enganosa”, disse Varella, em nota enviada à Lupa."
+      "content": "O conteúdo analisado pela Lupa é falso. O doutor Drauzio Varella nunca deu entrevista ao programa Fantástico recomendando um suplemento alimentar para dores nas articulações. “Nunca fiz nem nunca farei propaganda de remédios, muito menos desses que prometem curas sem comprovação científica. Sempre que você vir meu nome associado a algum medicamento tenha certeza: é mentira, propaganda enganosa”, disse Varella, em nota enviada à Lupa.",
+      "link": "https://piaui.folha.uol.com.br/lupa/2019/09/02/verificamos-drauzio-dores-articulares/"
     }
   ],
   "users": [
     {
-      "id": 1
+      "id": 1,
+      "name": "Paulo",
+      "email": "paulo@email.com"
     }
   ],
   "favorites": [
@@ -41,10 +43,28 @@
       "id": 2
     },
     {
-      "userId": 1,
       "newsId": 1,
+      "userId": 1,
+      "favoriteType": 0,
+      "id": 3
+    },
+    {
+      "newsId": 2,
+      "userId": 1,
+      "favoriteType": 0,
+      "id": 4
+    },
+    {
+      "newsId": 3,
+      "userId": 1,
       "favoriteType": 0,
       "id": 5
+    },
+    {
+      "newsId": 3,
+      "userId": 1,
+      "favoriteType": 1,
+      "id": 6
     }
   ]
 }

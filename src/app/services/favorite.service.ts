@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import 'rxjs/Rx';
 
 import { FavoriteModel } from '../model/favorite.model';
-import { FavoriteType } from '../model/favorite-type.model';
+import { FavoriteTypeModel } from '../model/favorite-type.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class FavoritesService {
 
   constructor(private http: HttpClient) { }
 
-  public getFavoriteId(userId: number, newsId: number, type: FavoriteType): Promise<number> {
+  public getFavoriteId(userId: number, newsId: number, type: FavoriteTypeModel): Promise<number> {
     return this.http.get(`${this.API_URL}/favorites?userId=${userId}&newsId=${newsId}&favoriteType=${type}`).map(
       (favorites: FavoriteModel[]) => {        
         return (favorites.length == 0) ? null : favorites[0].id;
@@ -23,18 +23,27 @@ export class FavoritesService {
     ).toPromise();
   }
 
-  public getAllByUser(userId: number, type: FavoriteType): Promise<FavoriteModel[]> {
-    return this.http.get(`${this.API_URL}/favorites?_expand=news&userId=${userId}&favoriteType=${type}`).map(
-      (favorites: FavoriteModel[]) => {        
-        return favorites.map(
-          (favorite: FavoriteModel) => new FavoriteModel(favorite)
+  public getAllByUser(userId: number, type: FavoriteTypeModel): Promise<FavoriteModel[]> {
+    return this.http.get(`${this.API_URL}/favorites?_expand=news&_expand=user&userId=${userId}&favoriteType=${type}`).map(
+      (itens: FavoriteModel[]) => {        
+        return itens.map(
+          (item: FavoriteModel) => {
+            return new FavoriteModel(item.id, item.user, item.news, item.favoriteType);
+          }
         )}
     ).toPromise();
   }
 
   public add(favorite: FavoriteModel): Promise<number> {
-    return this.http.post(`${this.API_URL}/favorites`, favorite).map(
-      (favorite: FavoriteModel) => favorite.id   
+    const data: any = {
+      newsId: favorite.news.id,
+      userId: favorite.user.id,
+      favoriteType: favorite.favoriteType,
+    }
+    return this.http.post(`${this.API_URL}/favorites`, data).map(
+      (favorite: FavoriteModel) => {
+        return favorite.id;
+      }   
     ).toPromise();
   }
 

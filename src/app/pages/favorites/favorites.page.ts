@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FavoritesService } from 'src/app/services/favorite.service';
 import { FavoriteModel } from 'src/app/model/favorite.model';
-import { FavoriteType } from 'src/app/model/favorite-type.model';
+import { FavoriteTypeModel } from 'src/app/model/favorite-type.model';
 
 @Component({
   selector: 'app-favorites',
@@ -20,6 +20,7 @@ export class FavoritesPage implements OnInit {
 
   async ionViewDidEnter() {
     this.userId = 1; // fake userid
-    this.lstFavoriteNews = await this.favoritesService.getAllByUser(this.userId, FavoriteType.STAR);
+    this.lstFavoriteNews = await this.favoritesService.getAllByUser(this.userId, FavoriteTypeModel.STAR);
+    console.log(this.lstFavoriteNews);
   }
 }
