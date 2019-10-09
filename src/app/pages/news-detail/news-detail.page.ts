@@ -29,7 +29,7 @@ export class NewsDetailPage implements OnInit {
 
   async ngOnInit() {
     this.newsId = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
-    this.user = new UserModel(1, "Paulo", "paulo@email.com"); 
+    this.user = new UserModel({id: 1, name: "Paulo", email: "paulo@email.com"});  // fake user
 
     this.currentNews = await this.newsService.searchById(this.newsId);
     this.starId = await this.favoritesService.getFavoriteId(this.user.id, this.newsId, FavoriteTypeModel.STAR);

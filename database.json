@@ -3,7 +3,7 @@
     {
       "id": 1,
       "title": "É montagem vídeo que mostra furacão Dorian sobre as Bahamas",
-      "likes": 19999,
+      "likes": 20000,
       "publishedAt": "09/04/2019 14:21:00",
       "image": "https://piaui.folha.uol.com.br/lupa/wp-content/uploads/2019/09/furacao-dorian-bahamas-destaque.jpg",
       "content": "A informação, analisada pela Lupa, é falsa. O vídeo é na verdade uma animação por computador, criada pelo artista digital norte-americano Brent Shavnore. Ele compartilhou a obra em sua conta no Instagram no dia 19 de maio deste ano. Mais de 164 mil pessoas visualizaram o vídeo. Shavnore criou o “furacão” sobre uma foto da cidade de Miami, nos Estados Unidos. Em sua página pessoal, imagens que mostram tempestades e raios sobre cidades ou paisagens são comuns.",
@@ -57,14 +57,14 @@
     {
       "newsId": 3,
       "userId": 1,
-      "favoriteType": 0,
-      "id": 5
-    },
-    {
-      "newsId": 3,
-      "userId": 1,
       "favoriteType": 1,
       "id": 6
+    },
+    {
+      "newsId": 1,
+      "userId": 1,
+      "favoriteType": 1,
+      "id": 7
     }
   ]
 }
