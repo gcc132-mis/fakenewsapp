@@ -13,9 +13,9 @@ const API_URL: string = "http://localhost:3000";
 export class FavoritesService {
 
 
-  constructor(private http: HttpClient) { }
+  constructor(public http: HttpClient) { }
 
-  public getFavoriteId(userId: number, newsId: number, type: FavoriteTypeModel): Promise<number> {
+   getFavoriteId(userId: number, newsId: number, type: FavoriteTypeModel): Promise<number> {
     return this.http.get(`${API_URL}/favorites?userId=${userId}&newsId=${newsId}&favoriteType=${type}`).map(
       (favorites: FavoriteModel[]) => {        
         return (favorites.length == 0) ? null : favorites[0].id;
@@ -23,7 +23,7 @@ export class FavoritesService {
     ).toPromise();
   }
 
-  public getAllByUser(userId: number, type: FavoriteTypeModel): Promise<FavoriteModel[]> {
+  getAllByUser(userId: number, type: FavoriteTypeModel): Promise<FavoriteModel[]> {
     return this.http.get(`${API_URL}/favorites?_expand=news&_expand=user&userId=${userId}&favoriteType=${type}`).map(
       (itens: FavoriteModel[]) => {        
         return itens.map(

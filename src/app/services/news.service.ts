@@ -12,7 +12,7 @@ const API_URL: string = "http://localhost:3000";
 export class NewsService {
 
 
-  constructor(private http: HttpClient) { }
+  constructor(public http: HttpClient) { }
 
   getAll(): Promise<NewsModel[]> {
     return this.http.get(`${API_URL}/news`).map(
