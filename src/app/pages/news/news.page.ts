@@ -9,19 +9,15 @@ import { NewsService } from 'src/app/services/news.service';
 })
 export class NewsPage implements OnInit {
 
-  private lstNews: NewsModel[];
+  lstNews: NewsModel[];
 
-  constructor(private newsService: NewsService) {}
+  constructor(public newsService: NewsService) {}
 
   ngOnInit() {
     this.lstNews = this.newsService.getAll();
   }
 
-  public updateListNews(event: any) {
+  updateListNews(event: any) {
     this.lstNews = this.newsService.searchByTitle(event.target.value);
-  }
-
-  public get LstNews(): NewsModel[] {
-    return this.lstNews;
   }
 }

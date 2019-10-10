@@ -13,8 +13,10 @@ export class NewsDetailPage implements OnInit {
 
   currentNews: NewsModel;
 
-  constructor(private activatedRoute: ActivatedRoute,
-    private newsService: NewsService, private socialSharing: SocialSharing) {
+  constructor(
+    public activatedRoute: ActivatedRoute,
+    public newsService: NewsService,
+    public socialSharing: SocialSharing) {
     const newsId: number = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
     this.currentNews = this.newsService.searchById(newsId);
   }
@@ -27,5 +29,5 @@ export class NewsDetailPage implements OnInit {
     }
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 }

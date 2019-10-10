@@ -6,11 +6,11 @@
 
 <ion-content>
 
-  <ion-searchbar showCancelButton="focus" placeholder="Encontrar notícias"
-  (ionChange)="updateListNews($event)"></ion-searchbar>
+  <ion-searchbar showCancelButton="focus" placeholder="Encontrar notícias" (ionChange)="updateListNews($event)">
+  </ion-searchbar>
 
-  <ion-card *ngFor="let news of lstNews">
-    <img src="{{news.image}}"  [routerLink]="['/details', news.id]"/>
+  <ion-card *ngFor="let news of lstNews" [routerLink]="['/details', news.id]">
+    <img src="{{news.image}}" />
     <ion-card-header>
       <ion-card-title>
         {{news.title}}
