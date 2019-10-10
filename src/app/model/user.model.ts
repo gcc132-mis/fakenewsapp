@@ -1,9 +1,6 @@
 export class UserModel {
-    id: number;
-    name: string;
-    email: string;
-
-    public constructor(data: any) {
-        Object.assign(this, data);
-    }
+    public constructor(
+        public name: string,
+        public email: string,
+        public id?: number) { }
 }

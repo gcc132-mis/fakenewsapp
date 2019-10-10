@@ -4,8 +4,7 @@ import { NewsModel } from 'src/app/model/news.model';
 import { NewsService } from 'src/app/services/news.service';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { FavoritesService } from 'src/app/services/favorite.service';
-import { FavoriteModel } from 'src/app/model/favorite.model';
-import { FavoriteTypeModel } from 'src/app/model/favorite-type.model';
+import { FavoriteModel, FavoriteTypeModel } from 'src/app/model/favorite.model';
 import { UserModel } from 'src/app/model/user.model';
 
 @Component({
@@ -19,17 +18,17 @@ export class NewsDetailPage implements OnInit {
   starId: number;
   likeId: number;
   newsId: number;
-  user: UserModel;
+  user: UserModel = new UserModel("Paulo", "paulo@email.com", 1);  // fake user
 
-  constructor(private activatedRoute: ActivatedRoute,
-    private socialSharing: SocialSharing,
-    private newsService: NewsService,
-    private favoritesService: FavoritesService) {
+  constructor(
+    public activatedRoute: ActivatedRoute,
+    public socialSharing: SocialSharing,
+    public newsService: NewsService,
+    public favoritesService: FavoritesService) {
   }
 
   async ngOnInit() {
     this.newsId = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
-    this.user = new UserModel({id: 1, name: "Paulo", email: "paulo@email.com"});  // fake user
 
     this.currentNews = await this.newsService.searchById(this.newsId);
     this.starId = await this.favoritesService.getFavoriteId(this.user.id, this.newsId, FavoriteTypeModel.STAR);
@@ -46,7 +45,7 @@ export class NewsDetailPage implements OnInit {
 
   async handleFavorite() {
     if (!this.starId) {
-      const favorite = new FavoriteModel(undefined, this.user, this.currentNews, FavoriteTypeModel.STAR);
+      const favorite = new FavoriteModel(this.user, this.currentNews, FavoriteTypeModel.STAR);
       this.starId = await this.favoritesService.add(favorite);
     } else {
       await this.favoritesService.delete(this.starId);
@@ -56,7 +55,7 @@ export class NewsDetailPage implements OnInit {
 
   async handleLike() {
     if (!this.likeId) {
-      let favorite = new FavoriteModel(undefined, this.user, this.currentNews, FavoriteTypeModel.LIKE);
+      let favorite = new FavoriteModel(this.user, this.currentNews, FavoriteTypeModel.LIKE);
       this.likeId = await this.favoritesService.add(favorite);
       this.currentNews.likes += 1;
     } else {

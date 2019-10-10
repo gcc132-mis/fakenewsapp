@@ -1,17 +1,15 @@
 import { NewsModel } from './news.model';
-import { FavoriteTypeModel } from './favorite-type.model';
 import { UserModel } from './user.model';
 
-export class FavoriteModel {    
-    id: number;
-    user: UserModel;
-    news: NewsModel;  
-    favoriteType: FavoriteTypeModel;
-    
-    public constructor(id: number, user: UserModel, news: NewsModel, favoriteType: FavoriteTypeModel) {
-        this.id = id;
-        this.user = user;
-        this.news = news;
-        this.favoriteType = favoriteType;
-    }
+export enum FavoriteTypeModel {
+    STAR = 0,
+    LIKE = 1
+}
+
+export class FavoriteModel {
+    public constructor(
+        public user: UserModel,
+        public news: NewsModel,
+        public favoriteType: FavoriteTypeModel,
+        public id?: number) { }
 }
