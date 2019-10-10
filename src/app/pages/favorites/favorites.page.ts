@@ -20,7 +20,8 @@ export class FavoritesPage implements OnInit {
 
   async ionViewDidEnter() {
     this.userId = 1; // fake userid
-    this.lstFavoriteNews = await this.favoritesService.getAllByUser(this.userId, FavoriteTypeModel.STAR);
+    this.lstFavoriteNews = await this.favoritesService.
+    getAllByUser(this.userId, FavoriteTypeModel.STAR);
     console.log(this.lstFavoriteNews);
   }
 }

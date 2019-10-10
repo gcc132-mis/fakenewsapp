@@ -4,17 +4,18 @@ import { HttpClient } from '@angular/common/http';
 
 import 'rxjs/Rx';
 
+const API_URL: string = "http://localhost:3000";
+
 @Injectable({
   providedIn: 'root'
 })
 export class NewsService {
 
-  API_URL: string = "http://localhost:3000";
 
   constructor(private http: HttpClient) { }
 
   public getAll(): Promise<NewsModel[]> {
-    return this.http.get(`${this.API_URL}/news`).map(
+    return this.http.get(`${API_URL}/news`).map(
       (itens: NewsModel[]) => {
         return itens.map(
           (item: NewsModel) => new NewsModel(item)
@@ -24,7 +25,7 @@ export class NewsService {
   }
 
   public searchById(id: number): Promise<NewsModel> {
-    return this.http.get(`${this.API_URL}/news/${id}`).map(
+    return this.http.get(`${API_URL}/news/${id}`).map(
       (item: NewsModel) => new NewsModel(item)
     ).toPromise();
   }
@@ -36,7 +37,7 @@ export class NewsService {
       return this.getAll();
     }
 
-    return this.http.get(`${this.API_URL}/news?q=${title}`).map(
+    return this.http.get(`${API_URL}/news?q=${title}`).map(
       (itens: NewsModel[]) => {
         return itens.map(
           (item: NewsModel) => new NewsModel(item)
@@ -46,7 +47,7 @@ export class NewsService {
   }
 
   public update(news: NewsModel) {
-    return this.http.put(`${this.API_URL}/news/${news.id}`, news).map(
+    return this.http.put(`${API_URL}/news/${news.id}`, news).map(
       (item: NewsModel) => new NewsModel(item)
     ).toPromise();
   }

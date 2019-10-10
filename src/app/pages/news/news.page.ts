@@ -13,9 +13,8 @@ export class NewsPage implements OnInit {
 
   constructor(private newsService: NewsService) { }
 
-  async ngOnInit() { 
+  async ngOnInit() {
     this.lstNews = await this.newsService.getAll();
-    console.log(this.lstNews);
   }
 
   public async updateListNews(event: any) {
