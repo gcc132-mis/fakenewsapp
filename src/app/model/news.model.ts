@@ -1,10 +1,8 @@
 export class NewsModel {
-    title: string;
-    likes: number;
-    publishedAt: Date;
-    image: string;
-
-    constructor(news: any) {
-        Object.assign(this, news);
-    }
-}
+    constructor(
+        public title: string,
+        public likes: number,
+        public publishedAt: Date,
+        public image: string,
+    ) {}
+} 
