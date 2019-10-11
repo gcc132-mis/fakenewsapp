@@ -1,14 +1,15 @@
 import { NewsModel } from './news.model';
-import { FavoriteType } from './favorite-type.model';
+import { UserModel } from './user.model';
 
-export class FavoriteModel {    
+export enum FavoriteTypeModel {
+    STAR = 0,
+    LIKE = 1
+}
 
-    id: number;
-    userId: number;
-    news: NewsModel;  
-    favoriteType: FavoriteType;
-    
-    public constructor(favorite: any) {
-        Object.assign(this, favorite);
-    }
+export class FavoriteModel {
+    public constructor(
+        public user: UserModel,
+        public news: NewsModel,
+        public favoriteType: FavoriteTypeModel,
+        public id?: number) { }
 }

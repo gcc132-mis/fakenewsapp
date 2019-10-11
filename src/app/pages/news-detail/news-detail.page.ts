@@ -4,8 +4,10 @@ import { NewsModel } from 'src/app/model/news.model';
 import { NewsService } from 'src/app/services/news.service';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { FavoritesService } from 'src/app/services/favorite.service';
-import { FavoriteModel } from 'src/app/model/favorite.model';
-import { FavoriteType } from 'src/app/model/favorite-type.model';
+import { FavoriteModel, FavoriteTypeModel } from 'src/app/model/favorite.model';
+import { UserModel } from 'src/app/model/user.model';
+import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-news-detail',
@@ -18,21 +20,26 @@ export class NewsDetailPage implements OnInit {
   starId: number;
   likeId: number;
   newsId: number;
-  userId: number;
+  user: UserModel;
 
-  constructor(private activatedRoute: ActivatedRoute,
-    private socialSharing: SocialSharing,
-    private newsService: NewsService,
-    private favoritesService: FavoritesService) {
+  constructor(
+    public activatedRoute: ActivatedRoute,
+    public socialSharing: SocialSharing,
+    public newsService: NewsService,
+    public favoritesService: FavoritesService,
+    public authService: AuthService,
+    public userService: UserService) {
   }
 
   async ngOnInit() {
+    const userEmail = await this.authService.getAuthEmail();
+    this.user = await this.userService.getUserByEmail(userEmail);
+
     this.newsId = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
-    this.userId = 1; // fake userid
 
     this.currentNews = await this.newsService.searchById(this.newsId);
-    this.starId = await this.favoritesService.getFavoriteId(this.userId, this.newsId, FavoriteType.STAR);
-    // this.likeId = await this.favoritesService.getIdByUserAndNews(this.userId, this.newsId, FavoriteType.LIKE);
+    this.starId = await this.favoritesService.getFavoriteId(this.user.id, this.newsId, FavoriteTypeModel.STAR);
+    this.likeId = await this.favoritesService.getFavoriteId(this.user.id, this.newsId, FavoriteTypeModel.LIKE);
   }
 
   async shareWhatsApp() {
@@ -45,13 +52,7 @@ export class NewsDetailPage implements OnInit {
 
   async handleFavorite() {
     if (!this.starId) {
-      let favorite = new FavoriteModel(
-        {
-          "userId": this.userId,
-          "newsId": this.newsId,
-          "favoriteType": FavoriteType.STAR
-        }
-      );
+      const favorite = new FavoriteModel(this.user, this.currentNews, FavoriteTypeModel.STAR);
       this.starId = await this.favoritesService.add(favorite);
     } else {
       await this.favoritesService.delete(this.starId);
@@ -61,13 +62,7 @@ export class NewsDetailPage implements OnInit {
 
   async handleLike() {
     if (!this.likeId) {
-      let favorite = new FavoriteModel(
-        {
-          "userId": this.userId,
-          "newsId": this.newsId,
-          "favoriteType": FavoriteType.LIKE
-        }
-      );
+      let favorite = new FavoriteModel(this.user, this.currentNews, FavoriteTypeModel.LIKE);
       this.likeId = await this.favoritesService.add(favorite);
       this.currentNews.likes += 1;
     } else {
