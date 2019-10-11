@@ -13,6 +13,17 @@ Aplicativo móvel de combate à propagação de notícias falsas - *fake news*. 
 **Diagrama de casos de uso**:
 ![Diagrama de casos de uso do aplicativo](https://github.com/gcc132-mis/fakenewsapp/blob/aula2/casos-de-uso-fakenewsapp.png)
 
-**Links úteis**:
+**Documentação**:
 * [Documento de requisitos](https://github.com/gcc132-mis/fakenewsapp/issues)
 * [Protótipo de interface gráfica](https://drive.google.com/open?id=1ghMFP8QrXtzOgCdFpcrkcMbaxhMjoE-jyRng_In7F7c)
+
+**Utilização**:
+
+Clone o repositório atual: 
+> git clone https://github.com/gcc132-mis/fakenewsapp.git
+
+Instale os scripts do *framework* Ionic:
+> npm install @ionic/app-scripts@latest --save-dev
+
+Execute o aplicativo:
+> ionic serve
