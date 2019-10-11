@@ -15,9 +15,9 @@ export class FavoritesService {
 
   constructor(public http: HttpClient) { }
 
-   getFavoriteId(userId: number, newsId: number, type: FavoriteTypeModel): Promise<number> {
+  getFavoriteId(userId: number, newsId: number, type: FavoriteTypeModel): Promise<number> {
     return this.http.get(`${API_URL}/favorites?userId=${userId}&newsId=${newsId}&favoriteType=${type}`).map(
-      (favorites: FavoriteModel[]) => {        
+      (favorites: FavoriteModel[]) => {
         return (favorites.length == 0) ? null : favorites[0].id;
       }
     ).toPromise();
@@ -25,12 +25,13 @@ export class FavoritesService {
 
   getAllByUser(userId: number, type: FavoriteTypeModel): Promise<FavoriteModel[]> {
     return this.http.get(`${API_URL}/favorites?_expand=news&_expand=user&userId=${userId}&favoriteType=${type}`).map(
-      (itens: FavoriteModel[]) => {        
+      (itens: FavoriteModel[]) => {
         return itens.map(
           (item: FavoriteModel) => {
             return new FavoriteModel(item.user, item.news, item.favoriteType, item.id);
           }
-        )}
+        )
+      }
     ).toPromise();
   }
 
@@ -43,11 +44,11 @@ export class FavoritesService {
     return this.http.post(`${API_URL}/favorites`, data).map(
       (favorite: FavoriteModel) => {
         return favorite.id;
-      }   
+      }
     ).toPromise();
   }
 
-  public delete(id: number): Promise<any> {    
+  public delete(id: number): Promise<any> {
     return this.http.delete(`${API_URL}/favorites/${id}`).toPromise();
   }
 }

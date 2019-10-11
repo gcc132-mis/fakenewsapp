@@ -6,6 +6,8 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { FavoritesService } from 'src/app/services/favorite.service';
 import { FavoriteModel, FavoriteTypeModel } from 'src/app/model/favorite.model';
 import { UserModel } from 'src/app/model/user.model';
+import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-news-detail',
@@ -18,16 +20,21 @@ export class NewsDetailPage implements OnInit {
   starId: number;
   likeId: number;
   newsId: number;
-  user: UserModel = new UserModel("Paulo", "paulo@email.com", 1);  // fake user
+  user: UserModel;
 
   constructor(
     public activatedRoute: ActivatedRoute,
     public socialSharing: SocialSharing,
     public newsService: NewsService,
-    public favoritesService: FavoritesService) {
+    public favoritesService: FavoritesService,
+    public authService: AuthService,
+    public userService: UserService) {
   }
 
   async ngOnInit() {
+    const userEmail = await this.authService.getAuthEmail();
+    this.user = await this.userService.getUserByEmail(userEmail);
+
     this.newsId = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
 
     this.currentNews = await this.newsService.searchById(this.newsId);
