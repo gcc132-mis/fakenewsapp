@@ -3,8 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import 'rxjs/Rx';
 
-import { FavoriteModel } from '../model/favorite.model';
-import { FavoriteTypeModel } from '../model/favorite-type.model';
+import { FavoriteModel, FavoriteTypeModel } from '../model/favorite.model';
 
 const API_URL: string = "http://localhost:3000";
 
@@ -13,9 +12,10 @@ const API_URL: string = "http://localhost:3000";
 })
 export class FavoritesService {
 
-  constructor(private http: HttpClient) { }
 
-  public getFavoriteId(userId: number, newsId: number, type: FavoriteTypeModel): Promise<number> {
+  constructor(public http: HttpClient) { }
+
+   getFavoriteId(userId: number, newsId: number, type: FavoriteTypeModel): Promise<number> {
     return this.http.get(`${API_URL}/favorites?userId=${userId}&newsId=${newsId}&favoriteType=${type}`).map(
       (favorites: FavoriteModel[]) => {        
         return (favorites.length == 0) ? null : favorites[0].id;
@@ -23,12 +23,12 @@ export class FavoritesService {
     ).toPromise();
   }
 
-  public getAllByUser(userId: number, type: FavoriteTypeModel): Promise<FavoriteModel[]> {
+  getAllByUser(userId: number, type: FavoriteTypeModel): Promise<FavoriteModel[]> {
     return this.http.get(`${API_URL}/favorites?_expand=news&_expand=user&userId=${userId}&favoriteType=${type}`).map(
       (itens: FavoriteModel[]) => {        
         return itens.map(
           (item: FavoriteModel) => {
-            return new FavoriteModel(item.id, item.user, item.news, item.favoriteType);
+            return new FavoriteModel(item.user, item.news, item.favoriteType, item.id);
           }
         )}
     ).toPromise();

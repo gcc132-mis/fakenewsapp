@@ -12,14 +12,14 @@ export class AuthService {
 
   authState = new BehaviorSubject(false);
 
-  constructor(private storage: Storage, private plt: Platform) {
+  constructor(public storage: Storage, public plt: Platform) {
     this.plt.ready().then(() => {
       this.checkToken();
     });
   }
 
   async checkToken() {
-    let res = await this.storage.get(TOKEN_KEY);
+    const res = await this.storage.get(TOKEN_KEY);
     if (res) {
       this.authState.next(true);
     }

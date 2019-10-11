@@ -12,25 +12,33 @@ const API_URL: string = "http://localhost:3000";
 export class NewsService {
 
 
-  constructor(private http: HttpClient) { }
+  constructor(public http: HttpClient) { }
 
-  public getAll(): Promise<NewsModel[]> {
+  getAll(): Promise<NewsModel[]> {
     return this.http.get(`${API_URL}/news`).map(
       (itens: NewsModel[]) => {
         return itens.map(
-          (item: NewsModel) => new NewsModel(item)
+          (item: NewsModel) => {
+            return new NewsModel(
+              item.id, item.title, item.likes, item.publishedAt,
+              item.image, item.content, item.link);
+          }
         )
       }
     ).toPromise();
   }
 
-  public searchById(id: number): Promise<NewsModel> {
+  searchById(id: number): Promise<NewsModel> {
     return this.http.get(`${API_URL}/news/${id}`).map(
-      (item: NewsModel) => new NewsModel(item)
+      (item: NewsModel) => {
+        return new NewsModel(
+          item.id, item.title, item.likes, item.publishedAt,
+          item.image, item.content, item.link);
+      }
     ).toPromise();
   }
 
-  public searchByTitle(title: string): Promise<NewsModel[]> {
+  searchByTitle(title: string): Promise<NewsModel[]> {
     title = title.trim().toLowerCase();
 
     if (title == '') {
@@ -40,15 +48,23 @@ export class NewsService {
     return this.http.get(`${API_URL}/news?q=${title}`).map(
       (itens: NewsModel[]) => {
         return itens.map(
-          (item: NewsModel) => new NewsModel(item)
+          (item: NewsModel) => {
+            return new NewsModel(
+              item.id, item.title, item.likes, item.publishedAt,
+              item.image, item.content, item.link);
+          }
         )
       }
     ).toPromise();
   }
 
-  public update(news: NewsModel) {
+  update(news: NewsModel) {
     return this.http.put(`${API_URL}/news/${news.id}`, news).map(
-      (item: NewsModel) => new NewsModel(item)
+      (item: NewsModel) => {
+        return new NewsModel(
+          item.id, item.title, item.likes, item.publishedAt,
+          item.image, item.content, item.link);
+      }
     ).toPromise();
   }
 }
