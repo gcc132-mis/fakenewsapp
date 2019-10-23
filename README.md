@@ -28,7 +28,7 @@ Instale os scripts do *framework* Ionic:
 Clone o repositório da API REST utilizada pelo aplicativo:
 > git clone https://github.com/gcc132-mis/fakenewsapi.git
 
-Siga o manual de instalação e execução da API para autenticação de usuários com JWT [aqui]  (https://github.com/gcc132-mis/fakenewsapi).
+Siga o manual de instalação e execução da API para autenticação de usuários com JWT [aqui](https://github.com/gcc132-mis/fakenewsapi).
 
 Execute o aplicativo:
 > ionic serve
