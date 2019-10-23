@@ -25,7 +25,7 @@ Clone o repositório atual:
 Instale os scripts do *framework* Ionic:
 > npm install @ionic/app-scripts@latest --save-dev
 
-Entre na pasta do aplicativo e execute a API FakeNewsAPI:
+Entre na pasta do projeto e execute a API REST utilizada pelo aplicativo:
 > json-server --watch database.json
 
 Execute o aplicativo:
