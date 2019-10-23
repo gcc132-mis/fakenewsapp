@@ -38,6 +38,11 @@
       "name": "jose",
       "email": "jose@jose.com",
       "id": 2
+    },
+    {
+      "name": "tadeu",
+      "email": "tadeu@tadeu.com",
+      "id": 3
     }
   ],
   "favorites": [

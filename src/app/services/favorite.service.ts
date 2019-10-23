@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import 'rxjs/Rx';
 
 import { FavoriteModel, FavoriteTypeModel } from '../model/favorite.model';
+import { AuthService } from './auth.service';
 
-const API_URL: string = "http://localhost:3000";
+const API_URL: string = "http://localhost:8000";
 
 @Injectable({
   providedIn: 'root'
@@ -13,18 +14,34 @@ const API_URL: string = "http://localhost:3000";
 export class FavoritesService {
 
 
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient, public authService: AuthService) { }
 
-  getFavoriteId(userId: number, newsId: number, type: FavoriteTypeModel): Promise<number> {
-    return this.http.get(`${API_URL}/favorites?userId=${userId}&newsId=${newsId}&favoriteType=${type}`).map(
+  async getHttpOptions() {
+    const token = await this.authService.getAuthToken();
+
+    const options = {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      })
+    };
+
+    return options;
+  }
+
+  async getFavoriteId(userId: number, newsId: number, type: FavoriteTypeModel): Promise<number> {
+    const options = await this.getHttpOptions();
+
+    return this.http.get(`${API_URL}/favorites?userId=${userId}&newsId=${newsId}&favoriteType=${type}`, options).map(
       (favorites: FavoriteModel[]) => {
         return (favorites.length == 0) ? null : favorites[0].id;
       }
     ).toPromise();
   }
 
-  getAllByUser(userId: number, type: FavoriteTypeModel): Promise<FavoriteModel[]> {
-    return this.http.get(`${API_URL}/favorites?_expand=news&_expand=user&userId=${userId}&favoriteType=${type}`).map(
+  async getAllByUser(userId: number, type: FavoriteTypeModel): Promise<FavoriteModel[]> {
+    const options = await this.getHttpOptions();
+
+    return this.http.get(`${API_URL}/favorites?_expand=news&_expand=user&userId=${userId}&favoriteType=${type}`, options).map(
       (itens: FavoriteModel[]) => {
         return itens.map(
           (item: FavoriteModel) => {
@@ -35,20 +52,25 @@ export class FavoritesService {
     ).toPromise();
   }
 
-  public add(favorite: FavoriteModel): Promise<number> {
+  async add(favorite: FavoriteModel): Promise<number> {    
     const data: any = {
       newsId: favorite.news.id,
       userId: favorite.user.id,
       favoriteType: favorite.favoriteType,
     }
-    return this.http.post(`${API_URL}/favorites`, data).map(
+
+    const options = await this.getHttpOptions();
+
+    return this.http.post(`${API_URL}/favorites`, data, options).map(
       (favorite: FavoriteModel) => {
         return favorite.id;
       }
     ).toPromise();
   }
 
-  public delete(id: number): Promise<any> {
-    return this.http.delete(`${API_URL}/favorites/${id}`).toPromise();
+  async delete(id: number): Promise<any> {
+    const options = await this.getHttpOptions();
+
+    return this.http.delete(`${API_URL}/favorites/${id}`, options).toPromise();
   }
 }

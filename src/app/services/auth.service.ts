@@ -9,7 +9,7 @@ import { UserService } from './user.service';
 const TOKEN_KEY = 'auth-token';
 const EMAIL_KEY = 'auth-userid';
 
-const API_URL_AUTH: string = "http://localhost:8000";
+const API_URL: string = "http://localhost:8000";
 
 @Injectable({
   providedIn: 'root'
@@ -36,14 +36,14 @@ export class AuthService {
   }
 
   async login(email: string, password: string) {
-    let data = {
+    const data = {
       "email": email,
       "password": password
     }
 
-    const token = await this.http.post(`${API_URL_AUTH}/auth/login`, data).map(
-      (data: any) => {
-        return data.access_token;
+    const token = await this.http.post(`${API_URL}/auth/login`, data).map(
+      (item: any) => {
+        return item.access_token;
       }
     ).toPromise();
 
@@ -56,11 +56,11 @@ export class AuthService {
   }
 
   async register(email: string, password: string) {
-    let data = {
+    const data = {
       "email": email,
       "password": password
     }
-    return this.http.post(`${API_URL_AUTH}/auth/register`, data).toPromise();
+    this.http.post(`${API_URL}/auth/register`, data).toPromise();
   }
 
   async logout() {
@@ -75,5 +75,9 @@ export class AuthService {
 
   async getAuthEmail() {
     return this.storage.get(EMAIL_KEY);
+  }
+
+  async getAuthToken() {
+    return this.storage.get(TOKEN_KEY);
   }
 }
