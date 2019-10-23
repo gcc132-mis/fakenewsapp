@@ -34,7 +34,7 @@ export class FavoritesService {
     ).toPromise();
   }
 
-  public add(favorite: FavoriteModel): Promise<number> {
+  add(favorite: FavoriteModel): Promise<number> {
     const data: any = {
       newsId: favorite.news.id,
       userId: favorite.user.id,
@@ -47,7 +47,7 @@ export class FavoritesService {
     ).toPromise();
   }
 
-  public delete(id: number): Promise<any> {    
+  delete(id: number): Promise<any> {    
     return this.http.delete(`${API_URL}/favorites/${id}`).toPromise();
   }
 }

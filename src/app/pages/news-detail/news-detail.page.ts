@@ -55,7 +55,7 @@ export class NewsDetailPage implements OnInit {
 
   async handleLike() {
     if (!this.likeId) {
-      let favorite = new FavoriteModel(this.user, this.currentNews, FavoriteTypeModel.LIKE);
+      const favorite = new FavoriteModel(this.user, this.currentNews, FavoriteTypeModel.LIKE);
       this.likeId = await this.favoritesService.add(favorite);
       this.currentNews.likes += 1;
     } else {
