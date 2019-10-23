@@ -13,8 +13,8 @@ export class MorePage implements OnInit {
   ngOnInit() {
   }
 
-  logout() {
-    this.authService.logout();
+  async logout() {
+    await this.authService.logout();
   }
 
 }

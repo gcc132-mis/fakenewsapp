@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { NewsModel } from '../model/news.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import 'rxjs/Rx';
+import { AuthService } from './auth.service';
 
-const API_URL: string = "http://localhost:3000";
+const API_URL: string = "http://localhost:8000";
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +13,24 @@ const API_URL: string = "http://localhost:3000";
 export class NewsService {
 
 
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient, public authService: AuthService) { }
 
-  getAll(): Promise<NewsModel[]> {
-    return this.http.get(`${API_URL}/news`).map(
+  async getHttpOptions() {
+    const token = await this.authService.getAuthToken();
+
+    const options = {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      })
+    };
+
+    return options;
+  }
+
+  async getAll(): Promise<NewsModel[]> {
+    const options = await this.getHttpOptions();
+
+    return this.http.get(`${API_URL}/news`, options).map(
       (itens: NewsModel[]) => {
         return itens.map(
           (item: NewsModel) => {
@@ -28,8 +43,10 @@ export class NewsService {
     ).toPromise();
   }
 
-  searchById(id: number): Promise<NewsModel> {
-    return this.http.get(`${API_URL}/news/${id}`).map(
+  async searchById(id: number): Promise<NewsModel> {
+    const options = await this.getHttpOptions();
+
+    return this.http.get(`${API_URL}/news/${id}`, options).map(
       (item: NewsModel) => {
         return new NewsModel(
           item.id, item.title, item.likes, item.publishedAt,
@@ -38,14 +55,17 @@ export class NewsService {
     ).toPromise();
   }
 
-  searchByTitle(title: string): Promise<NewsModel[]> {
+  async searchByTitle(title: string): Promise<NewsModel[]> {
+
     title = title.trim().toLowerCase();
 
     if (title == '') {
       return this.getAll();
     }
 
-    return this.http.get(`${API_URL}/news?q=${title}`).map(
+    const options = await this.getHttpOptions();
+
+    return this.http.get(`${API_URL}/news?q=${title}`, options).map(
       (itens: NewsModel[]) => {
         return itens.map(
           (item: NewsModel) => {
@@ -58,8 +78,10 @@ export class NewsService {
     ).toPromise();
   }
 
-  update(news: NewsModel) {
-    return this.http.put(`${API_URL}/news/${news.id}`, news).map(
+  async update(news: NewsModel) {
+    const options = await this.getHttpOptions();
+
+    return this.http.put(`${API_URL}/news/${news.id}`, news, options).map(
       (item: NewsModel) => {
         return new NewsModel(
           item.id, item.title, item.likes, item.publishedAt,
