@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ComponentFactoryResolver } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserModel } from 'src/app/model/user.model';
 import { UserService } from 'src/app/services/user.service';
@@ -23,8 +23,11 @@ export class RegisterPage implements OnInit {
   }
 
   async save() {
-    await this.authService.register(this.user.email, this.password);
-    await this.userService.add(this.user);
+    const token: any = await this.authService.register(this.user.email, this.password);
+    
+    // Isto foi necessário, pois o token ainda não existe e o usuário
+    // precisa ser cadastrado na base de dados da API
+    await this.userService.add(this.user, token.access_token);
     this.user = new UserModel();
     this.password = "";
     this.confPassword = "";

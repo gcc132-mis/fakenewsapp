@@ -36,8 +36,12 @@ export class UserService {
     ).toPromise();
   }
 
-  async add(user: UserModel) {
-    const options = await this.getHttpOptions();
+  async add(user: UserModel, token: string) {
+    const options = {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      })
+    };
 
     return this.http.post(`${API_URL}/users`, user, options).toPromise();
   }

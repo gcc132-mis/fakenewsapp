@@ -60,7 +60,7 @@ export class AuthService {
       "email": email,
       "password": password
     }
-    this.http.post(`${API_URL}/auth/register`, data).toPromise();
+    return this.http.post(`${API_URL}/auth/register`, data).toPromise();
   }
 
   async logout() {
