@@ -32,3 +32,6 @@ Siga o manual de instalação e execução da API para autenticação de usuári
 
 Execute o aplicativo:
 > ionic serve
+
+**Demonstração**:
+![Demonstração do aplicativo](https://github.com/gcc132-mis/fakenewsapp/blob/master/demo.gif)
