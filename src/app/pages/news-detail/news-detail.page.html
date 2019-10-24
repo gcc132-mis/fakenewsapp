@@ -1,9 +1,9 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="dark">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="tabs/news"></ion-back-button>
     </ion-buttons>
-    <ion-title>news-detail</ion-title>
+    <ion-title>FakeNewsApp</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,7 +13,7 @@
       <ion-card-title>
         {{currentNews.title}}
       </ion-card-title>
-      <ion-card-subtitle>Publicado em: {{currentNews.publishedAt}}</ion-card-subtitle>
+      <ion-card-subtitle>{{currentNews.publishedAt | timeAgo}}</ion-card-subtitle>
     </ion-card-header>
     <img src="{{currentNews.image}}" />
     <ion-card-content>
@@ -22,7 +22,7 @@
           <ion-tab-button>
             <ion-icon name="heart" *ngIf="likeId" (click)="handleLike()"  color="primary"></ion-icon>
             <ion-icon name="heart" *ngIf="!likeId" (click)="handleLike()"></ion-icon>
-            <ion-label>{{currentNews.likes}} likes</ion-label>
+            <ion-label>{{currentNews.likes | likes}} likes</ion-label>
           </ion-tab-button>
           <ion-tab-button *ngIf="starId"  (click)="handleFavorite()">
             <ion-icon name="star" color="primary"></ion-icon>
@@ -44,5 +44,5 @@
   </ion-card>
 </ion-content>
 <ion-footer *ngIf="currentNews">
-  <ion-button fill="outline" expand="block" href="{{currentNews.link}}" target="_blank">Ler mais...</ion-button>
+  <ion-button color="warning" expand="block" href="{{currentNews.link}}" target="_blank">Ler mais...</ion-button>
 </ion-footer>

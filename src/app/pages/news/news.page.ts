@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NewsModel } from 'src/app/model/news.model';
 import { NewsService } from 'src/app/services/news.service';
+import { LikesPipe } from 'src/app/pipes/likes.pipe';
 
 @Component({
   selector: 'app-news',
@@ -13,13 +14,16 @@ export class NewsPage implements OnInit {
 
   constructor(public newsService: NewsService) { }
 
-  ngOnInit() {}
-
-  async ionViewDidEnter() {
+  async ngOnInit() {
     this.lstNews = await this.newsService.getAll();
   }
 
-  public async updateListNews(event: any) {
+  async doRefresh(event: any) {
+    this.lstNews = await this.newsService.getAll();
+    event.target.complete();
+  }
+
+  async updateListNews(event: any) {
     this.lstNews = await this.newsService.searchByTitle(event.target.value);
   }
 }

@@ -1,21 +1,30 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>news</ion-title>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-icon slot="icon-only" name="locate"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>FakeNewsApp</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
-  <ion-searchbar showCancelButton="focus" placeholder="Encontrar notícias"
-  (ionChange)="updateListNews($event)"></ion-searchbar>
+  <ion-searchbar showCancelButton="focus" placeholder="Encontrar notícias" (ionChange)="updateListNews($event)">
+  </ion-searchbar>
 
-  <ion-card *ngFor="let news of lstNews"  [routerLink]="['/details', news.id]">
-    <img src="{{news.image}}"/>
+  <ion-card *ngFor="let news of lstNews" [routerLink]="['/details', news.id]">
+    <img src="{{news.image}}" />
     <ion-card-header>
       <ion-card-title>
         {{news.title}}
       </ion-card-title>
-      <ion-card-subtitle>{{news.likes}} likes | Publicado em: {{news.publishedAt}}</ion-card-subtitle>
+      <ion-card-subtitle>{{news.likes | likes}} likes | {{news.publishedAt | timeAgo}}</ion-card-subtitle>
     </ion-card-header>
+    
   </ion-card>
 </ion-content>

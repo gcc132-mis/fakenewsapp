@@ -13,6 +13,7 @@ import { UserService } from 'src/app/services/user.service';
 export class FavoritesPage implements OnInit {
 
   lstFavoriteNews: FavoriteModel[];
+  user: UserModel;
 
   constructor(
     public favoritesService: FavoritesService,
@@ -20,12 +21,18 @@ export class FavoritesPage implements OnInit {
     public userService: UserService) {
   }
 
-  ngOnInit() { }
-
-  async ionViewDidEnter() {
+  async ngOnInit() {
     const userEmail: string = await this.authService.getAuthEmail();
-    const user: UserModel = await this.userService.getUserByEmail(userEmail);
+    this.user = await this.userService.getUserByEmail(userEmail);
+
     this.lstFavoriteNews = await this.favoritesService.
-      getAllByUser(user.id, FavoriteTypeModel.STAR);
+      getAllByUser(this.user.id, FavoriteTypeModel.STAR);
+
+  }
+
+  async doRefresh(event: any) {
+    this.lstFavoriteNews = await this.favoritesService.
+      getAllByUser(this.user.id, FavoriteTypeModel.STAR);
+    event.target.complete();
   }
 }
