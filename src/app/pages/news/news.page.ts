@@ -19,8 +19,11 @@ export class NewsPage implements OnInit {
   }
 
   async doRefresh(event: any) {
-    this.lstNews = await this.newsService.getAll();
-    event.target.complete();
+    try {
+      this.lstNews = await this.newsService.getAll();
+    } finally {
+      event.target.complete();
+    }    
   }
 
   async updateListNews(event: any) {
