@@ -27,12 +27,14 @@ export class FavoritesPage implements OnInit {
 
     this.lstFavoriteNews = await this.favoritesService.
       getAllByUser(this.user.id, FavoriteTypeModel.STAR);
-
   }
 
   async doRefresh(event: any) {
-    this.lstFavoriteNews = await this.favoritesService.
-      getAllByUser(this.user.id, FavoriteTypeModel.STAR);
-    event.target.complete();
+    try {
+      this.lstFavoriteNews = await this.favoritesService.
+        getAllByUser(this.user.id, FavoriteTypeModel.STAR);
+    } finally {
+      event.target.complete();
+    }
   }
 }

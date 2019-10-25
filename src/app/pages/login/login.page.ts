@@ -18,13 +18,11 @@ export class LoginPage implements OnInit {
   }
 
   checkForm() {
-    if (
-      this.email == undefined || this.email.trim() == "" ||
+    if (this.email == undefined || this.email.trim() == "" ||
       this.password == undefined || this.password.trim() == "") {
       this.toastService.presentMessage("Por favor, preencha todos os campos do formulário!", MessageType.ERROR);
       return false;
     }
-
     return true;
   }
 
